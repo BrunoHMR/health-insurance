@@ -242,3 +242,8 @@ Modelo em produção:
 - Quando é feita uma requisição pelo browser do usuário para, por exemplo, acessar um site de uma empresa de e-commerce através da URL, no fundo o que está acontecendo é que o browser está acessando o end-point da empresa e ela está retornando a página HTML do site.
 - API Gateway: primeiro endpoint. Onde está o cache. Toda vez que é feita uma requisição, primeiro é acessado um banco de dados em memória, como o Reddis por exemplo, para que a recuperação das informações ocorra de maneira mais rápida.
 
+Google Sheets:
+- É possível editar os avisos dos erros. Por exemplo: se eu escrevi um dado errado, do tipo string, em uma coluna que só aceita valores numéricos, o modelo não irá conseguir realizar a predição e mostrará um erro. Porém, a mensagem de erro do Google Scripts é um HTML desorganizado. Sendo assim, o ideal seria editar a imagem para que os erros se tornem mais intuitivos ao usuário.
+- Verificar uma maneira de manter a previsão funcionando conforme forem sendo adicionadas novas colunas.
+
+
