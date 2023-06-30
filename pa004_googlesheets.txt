@@ -69,7 +69,7 @@ function PredictAll(){
     pred = ApiCall(json_send, '/healthinsurance/predict')
     
     // envia a predição para a coluna desejada (12) na planilha a partir da linha 2
-    ss.getRange(Number(row)+2, lastColumn+1).setValue(pred[0]['score'])
+    ss.getRange(Number(row)+2, lastColumn).setValue(pred[0]['score'])
     // vai começar a inserir os valores a partir da primeira linha na coluna chamada score
     Logger.log(pred[0])
     Logger.log(pred[0]['score'])

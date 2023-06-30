@@ -139,6 +139,10 @@ Principais conclusões da análise estatística descritiva:
 - Não há NAs e nem outliers aparentes.
 - 12% dos clientes possuem interesse em um serviço de seguro de carros.
 
+Engenharia de atributos:
+- Uma ideia proposta na Live 023 foi de criar duas novas colunas, uma delas relacionando o preço do seguro (annual_premium) com a idade (age) e a outra com a quantidade de dias (vintage).
+- Outra ideia foi criar outras duas novas colunas, uma delas dividindo o annual_premium do cliente pela média do annual_premium para a região do cliente e a outra para o canal de divulgação do cliente, para ver se o valor do cliente está abaixo ou acima da média.
+
 Lista de hipóteses:
 1. gender: mulheres possuem mais interesse em adquirir o seguro do que os homens, em proporção. Falsa.
 2. driving_license: clientes com licença possuem mais interesse em adquirir o seguro do que clientes sem licença, em proporção. Verdadeira.
@@ -191,8 +195,10 @@ Modelagem:
 - max_depth: define o crescimento da árvore. Número de elementos na folha: quanto mais elementos na folha, menor a profundidade da árvore e menor a quantidade de recortes no espaço, reduzindo o viés.
 
 Balanceamento de classes:
-- class_weight: dar peso para as classes para balanceá-las. Peso 1 para a classe majoritária e peso (quantidade de amostras da classe majoritária dividido pela quantidade de amostras da classe minoritária) para a classe minoritária. O algoritmo da Logistic Regression já possui a opção de balanceamento de classes via class_weight imbutida.
-- Under Sampling: quando há muitos exemplos da classe minoritária. Pode utilizar o Random Undersampling ou o Nearmiss Undersampling (semelhante ao KNN, mantém as classes majoritárias cujas distâncias para as classes minoritárias é a menor).
+1. class_weight: dar peso para as classes para balanceá-las. Peso 1 para a classe majoritária e peso (quantidade de amostras da classe majoritária dividido pela quantidade de amostras da classe minoritária) para a classe minoritária. O algoritmo da Logistic Regression já possui a opção de balanceamento de classes via class_weight imbutida.
+2. Under Sampling: quando há muitos exemplos da classe minoritária. Pode utilizar o Random Undersampling ou o Nearmiss Undersampling (semelhante ao KNN, mantém as classes majoritárias cujas distâncias para as classes minoritárias é a menor).
+3. Problema do Oversampling: pode overfittar o modelo.
+4. Problema do Undersampling: pode perder algum comportamento específico dos dados. Para solucionar este problema, pode fazer uma EDA para a classe majoritária e reduzí-la retirando amostras que não possuam um comportamento que faça sentido.
 
 Curvas de Rankeamento: simular cenários e tomar decisões. Reportar para o time de negócio.
 - Curva ROC: para cada threshold, pega um valor de FPR (eixo x) e um valor de TPR (eixo y) e traça uma curva. Com base nos requisitos do negócio, define-se através da curva qual é o melhor threshold e a taxa de erro. Por exemplo: em um problema de classificação de classes onde uma classe é gato e a outra é cachorro, não há uma importância maior entre gato ou cachorro.
@@ -242,8 +248,13 @@ Modelo em produção:
 - Quando é feita uma requisição pelo browser do usuário para, por exemplo, acessar um site de uma empresa de e-commerce através da URL, no fundo o que está acontecendo é que o browser está acessando o end-point da empresa e ela está retornando a página HTML do site.
 - API Gateway: primeiro endpoint. Onde está o cache. Toda vez que é feita uma requisição, primeiro é acessado um banco de dados em memória, como o Reddis por exemplo, para que a recuperação das informações ocorra de maneira mais rápida.
 
-Google Sheets:
+Google Sheets/Planilhas:
 - É possível editar os avisos dos erros. Por exemplo: se eu escrevi um dado errado, do tipo string, em uma coluna que só aceita valores numéricos, o modelo não irá conseguir realizar a predição e mostrará um erro. Porém, a mensagem de erro do Google Scripts é um HTML desorganizado. Sendo assim, o ideal seria editar a imagem para que os erros se tornem mais intuitivos ao usuário.
-- Verificar uma maneira de manter a previsão funcionando conforme forem sendo adicionadas novas colunas.
+- O código no Google Scripts não está realizando corretamente a preparação dos dados preparados com o MinMaxScaler e com o StandardScaler da biblioteca Scikit-Learn. O ideal seria montar duas funções que retornassem estas preparações sem utilizar o Scikit-Learn para testar.
+- Precisei criar duas funções específicas para a Standardization e para o MinMaxScaler para funcionar o google scripts.
 
+Ideias para os próximos ciclos:
+- Combinar a lista ordenada com uma lista de sobrevivência: a lista de sobrevivência pega o cliente ordenado e diz quantas ligações ou quantos contatos deverão ser feitos com aquele cliente para que o negócio se concretize. Ou seja, não quer dizer que o cliente ordenado em primeiro irá converter logo no primeiro contato.
 
+Dica de como explicar o projeto:
+- Explicar o que você fez e o que você esperava que acontecesse fazendo aquilo. Depois, dizer se o que você esperava foi concretizado ou não e por que.

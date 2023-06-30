@@ -7,9 +7,9 @@ class HealthInsurance():
     
     def __init__(self):
         self.home_path = 'C:\\Users\\micro\\Desktop\\repos\\3_ciclo_intermediario\\7_health_insurance_cross_sell\\'
-        self.annual_premium = pickle.load(open(self.home_path + 'parameter\\annual_premium.pkl', 'rb'))
-        self.age = pickle.load(open(self.home_path + 'parameter\\age.pkl', 'rb'))
-        self.vintage = pickle.load(open(self.home_path + 'parameter\\vintage.pkl', 'rb'))
+        # self.annual_premium = pickle.load(open(self.home_path + 'parameter\\annual_premium.pkl', 'rb'))
+        # self.age = pickle.load(open(self.home_path + 'parameter\\age.pkl', 'rb'))
+        # self.vintage = pickle.load(open(self.home_path + 'parameter\\vintage.pkl', 'rb'))
         self.region_code = pickle.load(open(self.home_path + 'parameter\\region_code.pkl', 'rb'))
         self.policy_sales_channel = pickle.load(open(self.home_path + 'parameter\\policy_sales_channel.pkl', 'rb'))
         
@@ -38,9 +38,12 @@ class HealthInsurance():
         return df1
         
     def data_preparation(self, df2):
-        df2['annual_premium'] = self.annual_premium.fit_transform(df2[['annual_premium']].values)
-        df2['age'] = self.age.fit_transform(df2[['age']].values)
-        df2['vintage'] = self.vintage.fit_transform(df2[['vintage']].values)
+        df2['annual_premium'] = (df2['annual_premium'] - df2['annual_premium'].mean()) / df2['annual_premium'].std()
+        df2['age'] = (df2['age'] - df2['age'].min()) / (df2['age'].max() - df2['age'].min())
+        df2['vintage'] = (df2['vintage'] - df2['vintage'].min()) / (df2['vintage'].max() - df2['vintage'].min())
+        # df2['annual_premium'] = df2['annual_premium'].apply(self.annual_premium)
+        # df2['age'] = df2['age'].apply(self.age)
+        # df2['vintage'] = df2['vintage'].apply(self.vintage)
         df2.loc[:,'region_code'] = df2['region_code'].map(self.region_code)
         df2.loc[:,'policy_sales_channel'] = df2['policy_sales_channel'].map(self.policy_sales_channel)
         # para caso algum 'policy_sales_channel' ou 'region_code' não aparça na validação, preencher com 0
