@@ -80,7 +80,7 @@ Principais conclusões da análise exploratória dos dados (EDA):
 5. policy_sales_channel: o canal com maior contagem de clientes é o canal com menor proporção de interesse (canal 152). O canal 156 possui uma amostra relevante de clientes (mais de 10 mil) e um percentual de interesse maior que 20%.
 6. vintage: possui pouca relação explícita com a variável resposta.
 
-## 5.0 Modelagem de Machine Learning e performance dos modelos
+# 5.0 Modelagem de Machine Learning e performance dos modelos
 
 Como é um problema de ordenação, a performance deve medir a qualidade da ordenação da base de clientes e não a performance da classificação. As previsões do modelo resultam nos scores de propensão de compra dos clientes.
 
@@ -102,7 +102,7 @@ Resultados finais do modelo após o Fine Tunning e a generalização:
 - Precisão Top K Média: 42,91%;
 - Recall Top K Média: 9,16%.
 
-## 6.0 Resultados de negócio
+# 6.0 Resultados de negócio
 
 Para avaliar os resultados do modelo do ponto de vista do negócio foram geradas duas novas colunas:
 - Porcentagem de interessados: quantidade de interessados até a posição 'k' dividido pela quantidade total de interessados;
@@ -118,4 +118,13 @@ Figura 1 - Curva de Ganho Cumulativo
 Figura 2 - Curva Lift
 ![lift_curve](https://github.com/BrunoHMR/health-insurance/assets/108444459/ad83a5f7-f185-48ef-89df-86a4917fb071)
 
+É possível utilizar como ponto de partida para a comparação entre as curvas de ganho acumulativo e Lift o valor de 30% para o tamanho da base. Com este valor, são captados cerca de 80% dos clientes interessados na compra do serviço de seguro de automóveis. Enquanto isso, no modelo Baseline seria captado cerca de apenas 30% da base, conforme visto na Figura 1. Já a curva Lift indica que com 30% da base o modelo proposto é mais de 2,5 vezes melhor que um modelo empírico, conforme mostra a Figura 2.
 
+# 7.0 Integração com o Google Sheets e próximos passos
+
+A integração foi possível através da criação de uma API via script dentro do próprio Google Sheets, onde foi desenvolvido um botão interativo em que o usuário de negócio solicita a predição e ele retorna, na coluna L, os valores dos scores de propensão. Com esta ferramenta, o usuário pode manipular as features disponíveis da forma que bem entender, colocando qualquer valor (desde que o formato esteja correto, exemplos: número inteiro para variáveis do tipo 'int' e textos para variáveis do tipo 'string'). Na Figura 3 é mostrado um exemplo do uso da aplicação:
+
+Figura 3 - Planilha no Google Sheets
+![google_sheets_api](https://github.com/BrunoHMR/health-insurance/assets/108444459/9c816190-ac42-444b-aedf-829aa222ed2c)
+
+Sugestão para projetos posteriores: combinar a lista ordenada com uma lista de sobrevivência, onde a lista de sobrevivência captura o cliente ordenado e avisa quantas ligações ou quantos contatos deverão ser feitos com aquele cliente para que o negócio seja concretizado. Ou seja, este projeto não indica que o cliente ordenado em primeiro irá converter logo no primeiro contato, mas apenas que ele é mais propenso a converter.
