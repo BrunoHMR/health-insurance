@@ -112,10 +112,12 @@ Métricas de avaliação escolhidas:
 - Curva de Ganho Cumulativo: define qual o percentual X da base de clientes, ordenados pela probabilidade de compra (predict_proba), contém o percentual Y de todos os interessados no novo produto.
 - Curva Lift: indica quantas vezes o modelo (curva de ganho acumulativo) é melhor que o modelo baseline (reta linear).
 
-Figura 1 - Curva de Ganho Cumulativo
+<center>Figura 1 - Curva de Ganho Acumulativo</center>
+
 ![cumulative_gain_curve](https://github.com/BrunoHMR/health-insurance/assets/108444459/c2a51779-d7fe-4fd6-a6e1-535a2e2ee2d2)
 
-Figura 2 - Curva Lift
+<center>Figura 2 - Curva Lift</center>
+
 ![lift_curve](https://github.com/BrunoHMR/health-insurance/assets/108444459/ad83a5f7-f185-48ef-89df-86a4917fb071)
 
 É possível utilizar como ponto de partida para a comparação entre as curvas de ganho acumulativo e Lift o valor de 30% para o tamanho da base. Com este valor, são captados cerca de 80% dos clientes interessados na compra do serviço de seguro de automóveis. Enquanto isso, no modelo Baseline seria captado cerca de apenas 30% da base, conforme visto na Figura 1. Já a curva Lift indica que com 30% da base o modelo proposto é mais de 2,5 vezes melhor que um modelo empírico, conforme mostra a Figura 2.
@@ -124,7 +126,8 @@ Figura 2 - Curva Lift
 
 A integração foi possível através da criação de uma API via script dentro do próprio Google Sheets, onde foi desenvolvido um botão interativo em que o usuário de negócio solicita a predição e ele retorna, na coluna L, os valores dos scores de propensão. Com esta ferramenta, o usuário pode manipular as features disponíveis da forma que bem entender, colocando qualquer valor (desde que o formato esteja correto, exemplos: número inteiro para variáveis do tipo 'int' e textos para variáveis do tipo 'string'). Na Figura 3 é mostrado um exemplo do uso da aplicação:
 
-Figura 3 - Planilha no Google Sheets
+<center> Figura 3 - Planilha no Google Sheets</center>
+
 ![google_sheets_api](https://github.com/BrunoHMR/health-insurance/assets/108444459/9c816190-ac42-444b-aedf-829aa222ed2c)
 
 Sugestão para projetos posteriores: combinar a lista ordenada com uma lista de sobrevivência, onde a lista de sobrevivência captura o cliente ordenado e avisa quantas ligações ou quantos contatos deverão ser feitos com aquele cliente para que o negócio seja concretizado. Ou seja, este projeto não indica que o cliente ordenado em primeiro irá converter logo no primeiro contato, mas apenas que ele é mais propenso a converter.
