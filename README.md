@@ -20,6 +20,8 @@ O lucro (L) é dado pela multiplicação entre o preço médio anual do seguro (
 
 $$ L = P\cdot Q - C $$
 
+Onde os custos ainda podem ser decompostos em custos operacionais e custo de aquisição de clientes (CAC).
+
 # 2.0 Planejamento da solução
 
 Fonte dos dados: https://www.kaggle.com/datasets/anmolkumar/health-insurance-cross-sell-prediction
@@ -29,7 +31,7 @@ Definição do problema: classificação do tipo Learn to Rank (ranqueamento).
 Ferramentas utilizadas: Python 3.9.16 e bibliotecas (contidas no arquivo do projeto 'requirements.txt').
 
 Formato da entrega:
-- Arquivo 'predictions.csv' contendo as propensões de compra dos 2.000 melhores clientes da base de teste.
+- Arquivo 'predictions.csv' contendo as propensões de compra dos 2.000 melhores clientes da base de teste, ordenadas do cliente mais propenso ao menos propenso.
 - Planilha no Google Sheets 'pa004_googlesheets.gs', onde o usuário do time de negócio pode customizar as features existentes e realizar as predições individualmente.
 
 Passos para a solução do problema:
@@ -80,5 +82,40 @@ Principais conclusões da análise exploratória dos dados (EDA):
 
 ## 5.0 Modelagem de Machine Learning e performance dos modelos
 
+Como é um problema de ordenação, a performance deve medir a qualidade da ordenação da base de clientes e não a performance da classificação. As previsões do modelo resultam nos scores de propensão de compra dos clientes.
+
+Métricas de avaliação escolhidas:
+- Precision Top K: conta quantas previsões foram acertadas até 'k' clientes e divide pelo número de previsões realizadas até 'k'.
+- Recall Top K: conta quantas previsões foram acertadas até 'k' clientes e divide pelo número total de exemplos verdadeiros.
+
+Em que neste caso o valor Top K é de 2.000, devido a restrição imposta pelo time de negócio da empresa.
+
+Resultados dos modelos:
+- KNN: Precisão Top K Média: 32,83% e Recall Top K Média: 6,91%;
+- Logistic Regression: Precisão Top K Média: 30,34% e Recall Top K Média: 6,54%;
+- Random Forest Classifier: Precisão Top K Média: 36,37% e Recall Top K Média: 7,74%;
+- **XGBoost Classifier: Precisão Top K Média: 42,22% e Recall Top K Média: 9,02%.**
+
+Por apresentar os melhores resultados foi escolhido seguir com o modelo XGBoost Classifier.
+
+Resultados finais do modelo após o Fine Tunning e a generalização:
+- Precisão Top K Média: 42,91%;
+- Recall Top K Média: 9,16%.
+
+## 6.0 Resultados de negócio
+
+Para avaliar os resultados do modelo do ponto de vista do negócio foram geradas duas novas colunas:
+- Porcentagem de interessados: quantidade de interessados até a posição 'k' dividido pela quantidade total de interessados;
+- Porcentagem da base: quantidade de clientes até a posição 'k' dividido pelo tamanho total da base.
+
+Métricas de avaliação escolhidas:
+- Curva de Ganho Cumulativo: define qual o percentual X da base de clientes, ordenados pela probabilidade de compra (predict_proba), contém o percentual Y de todos os interessados no novo produto.
+- Curva Lift: indica quantas vezes o modelo (curva de ganho acumulativo) é melhor que o modelo baseline (reta linear).
+
+Figura 1 - Curva de Ganho Cumulativo
+![cumulative_gain_curve](https://github.com/BrunoHMR/health-insurance/assets/108444459/c2a51779-d7fe-4fd6-a6e1-535a2e2ee2d2)
+
+Figura 2 - Curva Lift
+![lift_curve](https://github.com/BrunoHMR/health-insurance/assets/108444459/ad83a5f7-f185-48ef-89df-86a4917fb071)
 
 
