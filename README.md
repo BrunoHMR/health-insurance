@@ -128,6 +128,6 @@ A integração foi possível através da criação de uma API via script dentro 
 
 <center> Figura 3 - Planilha no Google Sheets</center>
 
-![google_sheets_api](https://github.com/BrunoHMR/health-insurance/assets/108444459/9c816190-ac42-444b-aedf-829aa222ed2c)
+![image](https://github.com/BrunoHMR/health-insurance/assets/108444459/77cc9f17-07fa-4682-b46e-6b3bfb3b5675)
 
 Sugestão para projetos posteriores: combinar a lista ordenada com uma lista de sobrevivência, onde a lista de sobrevivência captura o cliente ordenado e avisa quantas ligações ou quantos contatos deverão ser feitos com aquele cliente para que o negócio seja concretizado. Ou seja, este projeto não indica que o cliente ordenado em primeiro irá converter logo no primeiro contato, mas apenas que ele é mais propenso a converter.
