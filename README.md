@@ -32,7 +32,6 @@ Ferramentas utilizadas: Python 3.9.16 e bibliotecas (contidas no arquivo do proj
 
 Formato da entrega:
 - Arquivo 'predictions.csv' contendo as propensões de compra dos 2.000 melhores clientes da base de teste, ordenadas do cliente mais propenso ao menos propenso.
-- Planilha no Google Sheets 'pa004_googlesheets.gs', onde o usuário do time de negócio pode customizar as features existentes e realizar as predições individualmente.
 
 Passos para a solução do problema:
 1. Coleta e descrição dos dados;
@@ -88,7 +87,7 @@ Métricas de avaliação escolhidas:
 - Precision Top K: conta quantas previsões foram acertadas até 'k' clientes e divide pelo número de previsões realizadas até 'k'.
 - Recall Top K: conta quantas previsões foram acertadas até 'k' clientes e divide pelo número total de exemplos verdadeiros.
 
-Em que neste caso o valor Top K é de 2.000, devido a restrição imposta pelo time de negócio da empresa.
+Neste caso o valor Top K é de 2.000, devido à restrição imposta pelo time de negócio da empresa.
 
 Resultados dos modelos:
 - KNN: Precisão Top K Média: 32,83% e Recall Top K Média: 6,91%;
@@ -96,7 +95,7 @@ Resultados dos modelos:
 - Random Forest Classifier: Precisão Top K Média: 36,37% e Recall Top K Média: 7,74%;
 - **XGBoost Classifier: Precisão Top K Média: 42,22% e Recall Top K Média: 9,02%.**
 
-Por apresentar os melhores resultados foi escolhido seguir com o modelo XGBoost Classifier.
+Por apresentar os melhores resultados, foi escolhido seguir com o modelo XGBoost Classifier.
 
 Resultados finais do modelo após o Fine Tunning e a generalização:
 - Precisão Top K Média: 42,91%;
@@ -106,7 +105,7 @@ Resultados finais do modelo após o Fine Tunning e a generalização:
 
 Para avaliar os resultados do modelo do ponto de vista do negócio foram geradas duas novas colunas:
 - Porcentagem de interessados: quantidade de interessados até a posição 'k' dividido pela quantidade total de interessados;
-- Porcentagem da base: quantidade de clientes até a posição 'k' dividido pelo tamanho total da base.
+- Porcentagem da base: quantidade de clientes até a posição 'k' dividida pelo tamanho total da base.
 
 Métricas de avaliação escolhidas:
 - Curva de Ganho Cumulativo: define qual o percentual X da base de clientes, ordenados pela probabilidade de compra (predict_proba), contém o percentual Y de todos os interessados no novo produto.
@@ -121,13 +120,3 @@ Métricas de avaliação escolhidas:
 ![lift_curve](https://github.com/BrunoHMR/health-insurance/assets/108444459/ad83a5f7-f185-48ef-89df-86a4917fb071)
 
 É possível utilizar como ponto de partida para a comparação entre as curvas de ganho acumulativo e Lift o valor de 30% para o tamanho da base. Com este valor, são captados cerca de 80% dos clientes interessados na compra do serviço de seguro de automóveis. Enquanto isso, no modelo Baseline seria captado cerca de apenas 30% da base, conforme visto na Figura 1. Já a curva Lift indica que com 30% da base o modelo proposto é mais de 2,5 vezes melhor que um modelo empírico, conforme mostra a Figura 2.
-
-# 7.0 Integração com o Google Sheets e próximos passos
-
-A integração foi possível através da criação de uma API via script dentro do próprio Google Sheets, onde foi desenvolvido um botão interativo em que o usuário de negócio solicita a predição e ele retorna, na coluna L, os valores dos scores de propensão. Com esta ferramenta, o usuário pode manipular as features disponíveis da forma que bem entender, colocando qualquer valor (desde que o formato esteja correto, exemplos: número inteiro para variáveis do tipo 'int' e textos para variáveis do tipo 'string'). Na Figura 3 é mostrado um exemplo do uso da aplicação:
-
-<center> Figura 3 - Planilha no Google Sheets</center>
-
-![image](https://github.com/BrunoHMR/health-insurance/assets/108444459/77cc9f17-07fa-4682-b46e-6b3bfb3b5675)
-
-Sugestão para projetos posteriores: combinar a lista ordenada com uma lista de sobrevivência, onde a lista de sobrevivência captura o cliente ordenado e avisa quantas ligações ou quantos contatos deverão ser feitos com aquele cliente para que o negócio seja concretizado. Ou seja, este projeto não indica que o cliente ordenado em primeiro irá converter logo no primeiro contato, mas apenas que ele é mais propenso a converter.
