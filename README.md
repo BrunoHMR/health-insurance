@@ -8,7 +8,7 @@ Uma seguradora possui uma base de clientes que utiliza um determinado serviço d
 
 ## 1.2 Como funciona o modelo de negócio de uma seguradora?
 
-Exemplo prático: o usuário contrata um serviço de seguro de saúde no valor anual de R$5.000,00 e o serviço de seguro assegura R$200.000,00 a este usuário em caso de despesas médicas que estejam inclusas no contrato. Então, a seguradora calcula a probabilidade das pessoas ficarem doentes durante o ano. Por este motivo que os valores do seguro variam de acordo com as características de cada cliente (idade, habitos alimentares, estilo de vida...).
+Exemplo prático: o usuário contrata um serviço de seguro de saúde no valor anual de R$5.000,00 e o serviço de seguro assegura R$200.000,00 a este usuário em caso de despesas médicas que estejam inclusas no contrato. Então, a seguradora calcula a probabilidade das pessoas ficarem doentes durante o ano. Por este motivo os valores do seguro variam de acordo com as características de cada cliente (idade, hábitos alimentares, estilo de vida...).
 
 ## 1.3 O que é um Cross-Sell?
 
