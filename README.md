@@ -31,7 +31,7 @@ Definição do problema: classificação do tipo Learn to Rank (ranqueamento).
 Ferramentas utilizadas: Python 3.9.16 e bibliotecas (contidas no arquivo do projeto 'requirements.txt').
 
 Formato da entrega:
-- Arquivo 'predictions.csv' contendo as propensões de compra dos 2.000 melhores clientes da base de teste, ordenadas do cliente mais propenso ao menos propenso.
+- Arquivo 'predictions.csv', localizado dentro da pasta 'api', contendo as propensões de compra dos 2.000 melhores clientes da base de teste, ordenadas do cliente mais propenso ao menos propenso.
 
 Passos para a solução do problema:
 1. Coleta e descrição dos dados;
